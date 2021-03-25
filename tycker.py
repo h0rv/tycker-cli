@@ -6,19 +6,22 @@ from os import system, name
 from termcolor import colored
 from pyfiglet import figlet_format
 
-last_price = -1
+last_price = -1.0
 ticker = ''
 
 
 def on_message(ws, message):
     try:
         message = json.loads(message)
-        price = message['data'][0]['p']
+        price = float(message['data'][0]['p'])
         clear()
-        if last_price > price:
+        global last_price
+        global ticker
+        if price < last_price:
             print(colored(figlet_format(ticker + '\t'+price), color="red"))
         else:
             print(colored(figlet_format(price), color="green"))
+        last_price = price
     except:
         pass
 
@@ -29,6 +32,7 @@ def on_error(ws, error):
 
 
 def on_open(ws):
+    global ticker
     ws.send('{"type":"subscribe","symbol":"'+ticker+'"}')
 
 
@@ -42,6 +46,7 @@ def clear():
 
 
 def main():
+    global ticker
     ticker = input("Ticker: ")
     key = cfg.keys["finnhub"]
     system('setterm -cursor off')
