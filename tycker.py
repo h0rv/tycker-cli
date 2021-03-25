@@ -18,7 +18,8 @@ def on_message(ws, message):
         global last_price
         global ticker
         if price < last_price:
-            print(colored(figlet_format(ticker + '\t'+price), color="red"))
+            print(colored(figlet_format(ticker + '\t' +
+                  price, justify="center"), color="red"))
         else:
             print(colored(figlet_format(price), color="green"))
         last_price = price
