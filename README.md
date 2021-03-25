@@ -1,2 +1,2 @@
 # tycker-cli
-Python-CLI to update in real time current stock prices by its ticker.
+Python-CLI to display and update current stock prices in real time by their ticker.
