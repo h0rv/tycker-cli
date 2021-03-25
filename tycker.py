@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 import config as cfg
 import websocket
 import json
